@@ -12,12 +12,12 @@ namespace MirrorTest.Chat
         public override void OnStartServer()
         {
             playerName = (string)connectionToClient.authenticationData;
-            Debug.Log("Player OnStartServer");
+            Debug.Log($"Player {playerName} OnStartServer");
         }
 
         public override void OnStartLocalPlayer()
         {
-            Debug.Log("Player OnStartLocalPlayer");
+            Debug.Log($"Player {playerName} OnStartLocalPlayer");
         }
 
         public void DoSomething(string log)
