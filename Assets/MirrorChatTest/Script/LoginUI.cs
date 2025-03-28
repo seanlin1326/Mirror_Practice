@@ -9,6 +9,7 @@ namespace MirrorTest.Chat
     public class LoginUI : MonoBehaviour
     {
         [Header("UI Elements")]
+        [SerializeField] private ChatAuthenticator authenticator;
         [SerializeField] private TMP_InputField networkAddressInput;
         [SerializeField] private TMP_InputField usernameInput;
         [SerializeField] private Button hostButton;
@@ -33,6 +34,8 @@ namespace MirrorTest.Chat
         {
             string networkAddress = string.IsNullOrWhiteSpace(networkAddressInput.text)? "localhost": networkAddressInput.text.Trim();
             NetworkManager.singleton.networkAddress = networkAddress;
+            authenticator.playerName = usernameInput.text;
+
             LoginUISetActive(false);
             networkManager.StartHost();
         }
@@ -40,6 +43,7 @@ namespace MirrorTest.Chat
         {
             string networkAddress = string.IsNullOrWhiteSpace(networkAddressInput.text) ? "localhost" : networkAddressInput.text.Trim();
             NetworkManager.singleton.networkAddress = networkAddress;
+            authenticator.playerName = usernameInput.text;
             LoginUISetActive(false);
             networkManager.StartClient();
         }
