@@ -18,5 +18,10 @@ namespace MirrorTest.Chat
         {
           
         }
+
+        public void DoSomething(string log)
+        {
+            Debug.Log(log);
+        }
     }
 }
