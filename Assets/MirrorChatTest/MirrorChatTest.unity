@@ -393,6 +393,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  chatNetworkManager: {fileID: 254934383}
 --- !u!1 &254934381
 GameObject:
   m_ObjectHideFlags: 0

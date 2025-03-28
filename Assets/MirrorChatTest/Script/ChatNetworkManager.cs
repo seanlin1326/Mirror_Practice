@@ -1,5 +1,6 @@
 using Mirror;
 using Mirror.Examples.Chat;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,9 +8,15 @@ namespace MirrorTest.Chat
 {
     public class ChatNetworkManager : NetworkManager
     {
+        public event Action<NetworkConnectionToClient> whenNewPlayerJoinEvent;
         public void SetHostname(string hostname)
         {
             networkAddress = hostname;
+        }
+        public override void OnServerAddPlayer(NetworkConnectionToClient conn)
+        {
+            base.OnServerAddPlayer(conn);
+            whenNewPlayerJoinEvent?.Invoke(conn);
         }
         public override void OnServerDisconnect(NetworkConnectionToClient conn)
         {
