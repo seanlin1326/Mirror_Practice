@@ -17,9 +17,19 @@ namespace MirrorTest.Chat
 
         public override void OnStartLocalPlayer()
         {
+            CmdSend($"yeeeeeeeeeeee {playerName}");
             Debug.Log($"Player {playerName} OnStartLocalPlayer");
         }
-
+        [Command(requiresAuthority = false)]
+        void CmdSend(string log)
+        {
+            RpcReceive(log);
+        }
+        [ClientRpc]
+        void RpcReceive( string message)
+        {
+            Debug.Log("HaHa");
+        }
         public void DoSomething(string log)
         {
             Debug.Log(log);
