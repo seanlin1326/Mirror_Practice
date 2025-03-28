@@ -23,12 +23,17 @@ namespace MirrorTest.Chat
         [Command(requiresAuthority = false)]
         void CmdSend(string log)
         {
-            RpcReceive(log);
+            TargetRpcReceive(connectionToClient, log);
         }
         [ClientRpc]
-        void RpcReceive( string message)
+        void RpcReceive(string message)
         {
-            Debug.Log("HaHa");
+            Debug.Log(message);
+        }
+        [TargetRpc]
+        void TargetRpcReceive(NetworkConnection conn, string message)
+        {
+            Debug.Log(message);
         }
         public void DoSomething(string log)
         {
