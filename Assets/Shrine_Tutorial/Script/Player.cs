@@ -6,6 +6,25 @@ namespace Shrine_Tutorial
 {
     public class Player : NetworkBehaviour
     {
+        [SyncVar(hook = "OnHloaCountChange")]
+        int holaCount = 0;
+
+        void OnHloaCountChange(int oldValue,int newValue)
+        {
+            Debug.Log($"OnHloaCountChange old:{oldValue} new:{newValue}");
+        }
+        private void Update()
+        {
+            HandleMovement();
+            if (isLocalPlayer && Input.GetKeyDown(KeyCode.X))
+            {
+                Debug.Log("Send Hola To Server");
+                Hoda();
+               
+            }
+            
+        }
+        
         void HandleMovement()
         {
             if (isLocalPlayer)
@@ -16,9 +35,25 @@ namespace Shrine_Tutorial
                 transform.position = transform.position + movement;
             }
         }
-        private void Update()
+        [Command]
+
+        void Hoda()
         {
-            HandleMovement();
+            holaCount += 1;
+            Debug.Log("Receive Hola from Client");
+            ReplyHola();
+            ReplyHolaToAll();
+        }
+
+        [TargetRpc]
+        void ReplyHola()
+        {
+            Debug.Log("Receive From Server ReplyHola");
+        }
+        [ClientRpc]
+        void ReplyHolaToAll()
+        {
+            Debug.Log("Receive From Server ReplyHolaToAll");
         }
     }
 }
